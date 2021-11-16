@@ -28,7 +28,7 @@ public class PlayerService {
         throw new BadRequestException("Player with id: " + playerId + " is already exist.");
     }
 
-    public ResultDTO doBet(PlayMode mode, long playerId, int amountOfMoney, int number) {
+    public ResultDTO doBet(PlayMode mode, long playerId, int amountOfMoney, long number) {
         Account account = accountRepository.findAccountById(playerId);
         if (account == null) {
             throw new BadRequestException("Player with id: " + playerId + " doesn't exist.");
@@ -37,7 +37,7 @@ public class PlayerService {
             throw new BadRequestException("Player with id: " + playerId + " doesn't have enough money.\n " +
                     "Money: " + account.getMoney() + ", Bet: " + amountOfMoney);
         }
-        int randomizedNumber = randomizeService.randomize(mode);
+        long randomizedNumber = randomizeService.randomize(mode);
 
         ResultDTO result = new ResultDTO();
 

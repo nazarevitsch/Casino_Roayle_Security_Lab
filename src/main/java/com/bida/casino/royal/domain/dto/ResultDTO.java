@@ -7,5 +7,5 @@ public class ResultDTO {
 
     private AccountDTO account;
     private String message;
-    private int realNumber;
+    private long realNumber;
 }

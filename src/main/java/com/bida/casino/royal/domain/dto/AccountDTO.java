@@ -9,5 +9,5 @@ public class AccountDTO {
 
     private long id;
     private int money;
-    private ZonedDateTime creationTime;
+//    private ZonedDateTime creationTime;
 }

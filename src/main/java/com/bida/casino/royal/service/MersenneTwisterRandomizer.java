@@ -1,9 +1,12 @@
 package com.bida.casino.royal.service;
 
-import org.springframework.stereotype.Component;
+import com.bida.casino.royal.domain.emun.PlayMode;
 
-@Component
+import java.time.Instant;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class MersenneTwisterRandomizer {
+
     private static final int w = 32;
     private static final int n = 624;
     private static final int m = 397;
@@ -27,10 +30,18 @@ public class MersenneTwisterRandomizer {
     private long[] array;
     private int index;
 
-    public MersenneTwisterRandomizer() {
+    public MersenneTwisterRandomizer(PlayMode mode) {
+        long seed = 0;
+        if (mode == PlayMode.Mt) {
+            seed = Instant.now().getEpochSecond();
+        }
+        if (mode == PlayMode.BetterMt) {
+            seed = Math.abs(ThreadLocalRandom.current().nextInt());
+        }
+
         index = n + 1;
-        int seed = 0;
         array = new long[n];
+        array[0] = seed;
         for (int i = 1; i < n; i++) {
             array[i] = (f * (array[i - 1] ^ (array[i - 1] >> (w - 2))) + i) & Long.parseLong("ffffffff", 16);
         }
@@ -62,5 +73,6 @@ public class MersenneTwisterRandomizer {
             array[i] = array[(i + m) % n] ^ xA;
         }
     }
+
 
 }
