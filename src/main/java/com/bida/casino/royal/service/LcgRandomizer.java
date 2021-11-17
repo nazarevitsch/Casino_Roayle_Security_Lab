@@ -1,6 +1,6 @@
 package com.bida.casino.royal.service;
 
-import java.time.Instant;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class LcgRandomizer {
 
@@ -9,10 +9,8 @@ public class LcgRandomizer {
     private static final long m = (long) Math.pow(2, 32);
     private static final long c = 1170293;
 
-
     public LcgRandomizer() {
-//        lastNumber = Instant.now().getEpochSecond();
-        lastNumber = 84;
+        lastNumber = Math.abs(ThreadLocalRandom.current().nextInt());
     }
 
     public long getNumber() {
