@@ -13,15 +13,8 @@ public class LcgRandomizer {
         lastNumber = Math.abs(ThreadLocalRandom.current().nextInt());
     }
 
-    public long getNumber() {
-//        It is a little bit difficult to use unsigned int in java(
-//        return (lastNumber * a + c) % m;
-
-        lastNumber = lastNumber * a;
-        lastNumber = lastNumber > 4294967295L ? lastNumber - 4294967296L : lastNumber;
-        lastNumber = lastNumber + c;
-        lastNumber = lastNumber > 4294967295L ? lastNumber - 4294967296L : lastNumber;
-        lastNumber = lastNumber % m;
-        return lastNumber;
+    public int getNumber() {
+        lastNumber = (lastNumber * a + c) % m;
+        return (int) lastNumber;
     }
 }
